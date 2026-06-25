@@ -1,0 +1,3 @@
+
+server:
+  forward-headers-strategy: native   # X-Forwarded-For 를 이용한 IP 조회

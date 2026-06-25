@@ -1,0 +1,25 @@
+
+
+spring:
+  cloud:
+    # Discover Server via Consul
+    consul:
+      host: localhost
+      port: 21671
+
+management:
+  opentelemetry:
+    tracing:
+      export:
+        otlp:
+          endpoint: "http://localhost:21663/v1/traces" # Jaeger HTTP endpoint
+
+logging:
+  console:
+    enabled: true
+  file:
+    name: "/tmp/logs/${application.id}.log"
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 3

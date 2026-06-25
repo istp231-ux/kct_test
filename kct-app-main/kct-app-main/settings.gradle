@@ -1,0 +1,6 @@
+rootProject.name = 'im'
+
+include 'libs:traceable-flux'   // traceable library for webflux
+include 'libs:traceable-web'    // traceable library for webmvc
+
+include 'apps:echo'

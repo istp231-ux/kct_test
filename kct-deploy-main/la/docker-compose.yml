@@ -1,0 +1,41 @@
+services:
+  la-01:
+    image: grafana/alloy:latest
+    container_name: la-01
+    hostname: la-01
+    ports:
+      - 21641:12345
+    volumes:
+      # alloy settings
+      - ./settings/config.alloy:/etc/alloy/config.alloy:ro
+
+      # alloy data
+      - alloy-data:/var/lib/alloy/data
+
+      # log directory
+      - im-log-data:/opt/im/logs:ro,z
+      - /tmp/logs:/host/logs:ro
+
+      # regist consul service
+      #- ./service/alloy-service.json:/opt/scripts/alloy-service.json
+      #- ./service/register.sh:/opt/scripts/register-service.sh
+    environment:
+      - TZ=Asia/Seoul
+    command: 
+      - "run"
+      - "--server.http.listen-addr=0.0.0.0:12345"
+      - "--storage.path=/var/lib/alloy/data"
+      - "/etc/alloy/config.alloy"
+    #post_start:
+    #  - command: /opt/scripts/register-service.sh
+    restart: unless-stopped
+
+volumes:
+  im-log-data:
+    external: true
+  alloy-data:
+
+networks:
+  default:
+    name: im-net
+    external: true

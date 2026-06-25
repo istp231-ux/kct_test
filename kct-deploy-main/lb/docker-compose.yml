@@ -1,0 +1,27 @@
+
+services:
+
+  # Consul Node 01
+  lb-01:
+    image: hashicorp/consul:latest
+    container_name: lb-01
+    hostname: lb-01
+    restart: always
+    environment:
+      - TZ=Asia/Seoul
+    volumes:
+      - consul_data:/consul/data
+      - ./settings/config.json:/etc/consul/config.json
+    ports:
+      - "21671:8500"      # HTTP API and Web UI
+      - "21672:8600/tcp"  # DNS Server (TCP)
+      - "21672:8600/udp"  # DNS Server (UDP)
+    command: "agent -server -ui -node=lb-01 -bootstrap-expect=1 -client=0.0.0.0"
+
+volumes:
+  consul_data:
+
+networks:
+  default:
+    name: im-net
+    external: true

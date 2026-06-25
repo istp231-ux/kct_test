@@ -1,0 +1,36 @@
+
+// Discover targets from teh Consul catalog
+discovery.consul "consul_discovery" {
+    server = "lb-01:8500"
+    services = ["log aggregater"]
+}
+
+loki.source.file "im_service" {
+	targets = [
+        // docker logging
+        {       
+		    __address__ = "localhost",
+		    __path__    = "/opt/im/logs/*.log",
+		    job         = "im-log",
+	    },
+        // local storage log(/tmp)
+        {       
+		    __address__ = "localhost",
+		    __path__    = "/host/logs/*.log",
+		    job         = "im-log",
+	    },
+    ]
+	forward_to = [loki.write.default.receiver]
+
+	file_match {
+		enabled = true
+	}
+	legacy_positions_file = "/tmp/positions.yaml"
+}
+
+loki.write "default" {
+	endpoint {
+		url = "http://loki:3100/loki/api/v1/push"
+	}
+	external_labels = {}
+}

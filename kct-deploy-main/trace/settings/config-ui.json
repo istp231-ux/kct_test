@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "menuEnabled": false
+  },
+  "archiveEnabled": true,
+  "menu": [
+    {
+      "label": "i-Monitor Transaction Trace",
+      "items": [
+        {
+          "label": "About Jaeger",
+          "url": "https://github.com/jaegertracing/jaeger"
+        },
+        {
+          "label": "i-Monitor Project (for KCT PS)",
+          "url": "https://git.i-commtech.co.kr/i-monitor/project/kct-app"
+        }
+      ]
+    }
+  ]
+}
+
+

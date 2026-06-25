@@ -1,0 +1,32 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: echo
+    metrics_path: '/meter/prometheus'
+    static_configs:
+      - targets: ['host.docker.internal:9121']
+#  - job_name: access-point-logger
+#    metrics_path: '/meter/prometheus'
+#    static_configs:
+#      - targets: ['apl-91-01:9111']
+#  - job_name: managed-object-manager
+#    metrics_path: '/meter/prometheus'
+#    static_configs:
+#      - targets: ['host.docker.internal:9105']
+#  - job_name: indexer
+#    metrics_path: '/meter/prometheus'
+#    static_configs:
+#      - targets: ['idx-91-01:9103', 'idx-91-02:9103']
+  - job_name: jaeger
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['trace-server:8888']
+  - job_name: load-balancer
+    metrics_path: '/v1/agent/metrics'
+    params:
+      format: ['prometheus']
+    static_configs:
+      - targets: ['lb-01:8500']
+

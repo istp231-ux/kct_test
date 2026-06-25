@@ -1,0 +1,6 @@
+{
+  "telemetry": {
+    "prometheus_retention_time": "10m",
+    "disable_hostname": true
+  }
+}

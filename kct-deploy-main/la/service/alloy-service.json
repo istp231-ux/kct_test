@@ -1,0 +1,12 @@
+{
+  "ID": "la-01",
+  "Name": "log-aggregator",
+  "Tags": ["log", "aggregator", "monitoring"],
+  "Address": "la-01",
+  "Port": 12345,
+  "Check": {
+    "HTTP": "http://la-01:12345/metrics",
+    "Interval": "10s",
+    "Timeout": "5s"
+  }
+}
